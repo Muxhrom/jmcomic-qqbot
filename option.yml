@@ -1,0 +1,35 @@
+# jmcomic 配置文件 (option.yml) - 机器人版
+
+client:
+  impl: api
+  
+  # ↓↓↓↓ postman 必须在这里，缩进到 client 下方 ↓↓↓↓
+  postman:
+    meta_data:
+      # 代理配置，如果你不需要代理，可以删除 proxies 整个块
+      proxies:
+        http: 'http://127.0.0.1:7890'
+        https: 'http://127.0.0.1:7890'
+  # ↑↑↑↑ postman 配置结束 ↑↑↑↑
+
+download:
+  # 图片下载的临时目录
+  dir_rule:
+    base_dir: XXXXXXXXX
+    rule: Bd / Aauthor / (JM{Aid})-{Atitle} / [{Pindex}]-{Ptitle}
+  image:
+    decode: true
+    suffix: .jpg
+  threading:
+    photo: 16
+    image: 30
+
+# -----------------------------------------------
+# ↓↓↓↓ 插件配置 ↓↓↓↓
+# -----------------------------------------------
+plugins:
+  after_album:
+    - plugin: img2pdf
+      kwargs:
+        pdf_dir: XXXXXXXXXX
+        filename_rule: Aid
